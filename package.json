@@ -1,6 +1,6 @@
 {
   "name": "oi-app-client",
-  "homepage": "https://ga-fantastic-five.github.io/oi-app-client",
+  "homepage": "https://ga-fantastic-five.github.io/oi-app-client/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
