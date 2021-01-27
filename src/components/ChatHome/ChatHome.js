@@ -9,6 +9,8 @@ import Button from 'react-bootstrap/Button'
 
 import apiUrl from '../../apiConfig'
 
+import './ChatHome.scss'
+
 // Import socket.io & set endpoint
 import socketio from 'socket.io-client'
 // connects our endpoint to our apiUrl logic in api.Config
@@ -73,25 +75,33 @@ class ChatHome extends Component {
     return (
       // created divs with classes for our chat form
       <div className="row">
-        <div className="col-12">
-          {this.state.messages ? messageJsx : <p>No messages</p>}
-        </div>
-        <div className="col-12">
-          <Form onSubmit={this.handleMessage}>
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Message</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Write your message"
-                name="chat_message"
-                value={this.state.chat_message}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Send Message
-            </Button>
-          </Form>
+        <div className="col-4"></div>
+        <div className="col-8">
+          <div className="col-12">
+            <div className="message-container" style={{ border: '1px solid black' }}>
+              {this.state.messages ? messageJsx : <p>No messages</p>}
+            </div>
+          </div>
+          <div className="col-12 mt-3">
+            <Form onSubmit={this.handleMessage} style={{ display: 'flex' }}>
+              <div className="col-10 p-0 m-0">
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Control
+                    type="text"
+                    placeholder="Write your message"
+                    name="chat_message"
+                    value={this.state.chat_message}
+                    onChange={this.handleChange}
+                  />
+                </Form.Group>
+              </div>
+              <div className="col-2 p-0 m-0">
+                <Button className="w-100" variant="primary" type="submit">
+                  Send
+                </Button>
+              </div>
+            </Form>
+          </div>
         </div>
       </div>
     )
