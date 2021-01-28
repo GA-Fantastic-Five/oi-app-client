@@ -1,6 +1,6 @@
 let apiUrl
 const apiUrls = {
-  production: 'https://oi-chat-api.herokuapp.com/',
+  production: 'https://oi-chat-api.herokuapp.com',
   development: 'http://localhost:4741'
 }
 
