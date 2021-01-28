@@ -9,6 +9,7 @@ import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
+// import Dash from './components/SideNav/Dash'
 
 // Chat home
 import ChatHome from './components/ChatHome/ChatHome'
@@ -63,7 +64,6 @@ class App extends Component {
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
-          {/* creates an authenticated route that allows only signed-in users to view path/chat */}
           <AuthenticatedRoute user={user} path='/chat' render={() => (
             <ChatHome msgAlert={this.msgAlert} user={user} />
           )} />

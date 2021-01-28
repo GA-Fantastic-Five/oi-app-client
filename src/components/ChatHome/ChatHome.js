@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
@@ -6,6 +5,9 @@ import { v4 as uuid } from 'uuid'
 // Import react bootstrap
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import InputGroup from 'react-bootstrap/InputGroup'
+// import Row from 'react-bootstrap/Row'
+// import Col from 'react-bootstrap/Col'
 
 import apiUrl from '../../apiConfig'
 
@@ -26,7 +28,7 @@ class ChatHome extends Component {
       // create an empty array [empty chatroom]
       messages: [],
       // set our chat message input to an empty string
-      chat_message: ''
+      chat_message: null
     }
   }
 
