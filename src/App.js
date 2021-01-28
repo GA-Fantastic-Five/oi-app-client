@@ -13,6 +13,7 @@ import ChangePassword from './components/ChangePassword/ChangePassword'
 
 // Chat home
 import ChatHome from './components/ChatHome/ChatHome'
+import ProfileCreate from './components/Profile/Profile'
 
 class App extends Component {
   constructor (props) {
@@ -65,6 +66,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/chat' render={() => (
             <ChatHome msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/profiles' render={() => (
+            <ProfileCreate msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
