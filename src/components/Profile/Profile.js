@@ -62,7 +62,7 @@ class ProfileCreate extends Component {
     // if the profile has been created and we set its id
     if (createdId) {
       // redirect to the profiles show page
-      return <Redirect to={`/profiles/${createdId}`} />
+      return <Redirect to={`/show-profile/${createdId}`} />
     }
     return (
       <div>

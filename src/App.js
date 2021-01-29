@@ -69,10 +69,10 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/chat' render={() => (
             <ChatHome msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/profiles' render={() => (
+          <AuthenticatedRoute user={user} path='/create-profiles' render={() => (
             <CreateProfile msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/show-profile' render={() => (
+          <AuthenticatedRoute user={user} path='/profiles/:nickname' render={() => (
             <ProfileShow msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/index-profile' render={() => (

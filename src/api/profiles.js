@@ -22,14 +22,13 @@ export const indexProfiles = (user) => {
   })
 }
 
-export const showProfile = (id, user, profile) => {
+export const showProfile = (nickname, user, profile) => {
   return axios({
-    url: apiUrl + '/profiles/' + id,
+    url: apiUrl + '/profiles/' + nickname,
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${user.token}`
-    },
-    data: { profile }
+    }
   })
 }
 
