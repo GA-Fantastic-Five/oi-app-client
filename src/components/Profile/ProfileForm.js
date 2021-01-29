@@ -10,6 +10,15 @@ const ProfileForm = ({ profile, handleSubmit, handleChange }) => (
       value={profile.nickname}
       onChange={handleChange}
     />
+    <label>Avatar</label>
+    <input
+      required
+      placeholder='Enter profile avatar'
+      // This name should line up with the state we want to change
+      name='avatar'
+      value={profile.avatar}
+      onChange={handleChange}
+    />
     <button type='submit'>Create profile</button>
   </form>
 )
