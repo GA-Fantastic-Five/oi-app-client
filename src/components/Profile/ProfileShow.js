@@ -34,7 +34,7 @@ class ProfileShow extends Component {
   }
 
   handleDelete = event => {
-    const { user, msgAlert } = this.props
+    const { user, msgAlert, clearProfile } = this.props
     // make a delete axios request
     deleteProfile(user)
       // set the deleted variable to true, to redirect to the profiless page in render
@@ -44,6 +44,7 @@ class ProfileShow extends Component {
         message: 'Profile deleted!',
         variant: 'success'
       }))
+      .then(() => clearProfile())
       .catch(error => {
         msgAlert({
           heading: 'Deleting Profile Failed',

@@ -12,7 +12,6 @@ const ProfileForm = ({ profile, handleSubmit, handleChange }) => (
     />
     <label>Avatar</label>
     <input
-      required
       placeholder='Enter profile avatar'
       // This name should line up with the state we want to change
       name='avatar'

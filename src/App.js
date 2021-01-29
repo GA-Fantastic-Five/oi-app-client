@@ -23,13 +23,18 @@ class App extends Component {
     super(props)
     this.state = {
       user: null,
+      profile: null,
       msgAlerts: []
     }
   }
 
   setUser = user => this.setState({ user })
 
+  setProfile = profile => this.setState({ profile })
+
   clearUser = () => this.setState({ user: null })
+
+  clearProfile = () => this.setState({ profile: null })
 
   deleteAlert = (id) => {
     this.setState((state) => {
@@ -63,13 +68,13 @@ class App extends Component {
         <main className="container mt-3">
           {/* User routes */}
           <Route path='/sign-up' render={() => (
-            <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
+            <SignUp msgAlert={this.msgAlert} setUser={this.setUser} setProfile={this.setProfile} />
           )} />
           <Route path='/sign-in' render={() => (
-            <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
+            <SignIn msgAlert={this.msgAlert} setUser={this.setUser} setProfile={this.setProfile} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
-            <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
+            <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} clearProfile={this.clearProfile} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
@@ -85,7 +90,7 @@ class App extends Component {
             <CreateProfile msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/profiles/:nickname' render={() => (
-            <ProfileShow msgAlert={this.msgAlert} user={user} />
+            <ProfileShow msgAlert={this.msgAlert} user={user} clearProfile={this.clearProfile} />
           )} />
           <AuthenticatedRoute user={user} path='/index-profile' render={() => (
             <ProfileIndex msgAlert={this.msgAlert} user={user} />

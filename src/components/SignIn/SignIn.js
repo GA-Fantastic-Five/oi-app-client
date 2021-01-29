@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { signIn } from '../../api/auth'
+import { getUserProfile } from '../../api/profiles'
 import messages from '../AutoDismissAlert/messages'
 
 import Form from 'react-bootstrap/Form'
@@ -24,10 +25,15 @@ class SignIn extends Component {
   onSignIn = event => {
     event.preventDefault()
 
-    const { msgAlert, history, setUser } = this.props
+    const { msgAlert, history, setUser, setProfile } = this.props
 
     signIn(this.state)
-      .then(res => setUser(res.data.user))
+      .then(res => {
+        setUser(res.data.user)
+        return res.data.user
+      })
+      .then(res => getUserProfile(res))
+      .then(res => setProfile(res.data.profile))
       .then(() => msgAlert({
         heading: 'Sign In Success',
         message: messages.signInSuccess,

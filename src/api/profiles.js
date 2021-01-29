@@ -22,6 +22,16 @@ export const indexProfiles = (user) => {
   })
 }
 
+export const getUserProfile = (user) => {
+  return axios({
+    url: apiUrl + '/profile',
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    }
+  })
+}
+
 export const showProfile = (nickname, user, profile) => {
   return axios({
     url: apiUrl + '/profiles/' + nickname,
