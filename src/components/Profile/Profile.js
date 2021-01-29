@@ -8,8 +8,7 @@ class ProfileCreate extends Component {
     // initially our profiles title and director will be empty until they are filled in
     this.state = {
       profile: {
-        title: '',
-        director: ''
+        nickname: ''
       },
       // createdId will be null, until we successfully create a profile
       createdId: null
