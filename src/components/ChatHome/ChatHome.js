@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
+import Message from '../Messages/Message'
+import RoomData from '../RoomData/RoomData'
+import RoomInfo from '../RoomInfo/RoomInfo'
 
 // Import react bootstrap
 import Form from 'react-bootstrap/Form'
@@ -27,7 +30,7 @@ class ChatHome extends Component {
       // create an empty array [empty chatroom]
       messages: [],
       // set our chat message input to an empty string
-      chat_message: null
+      chat_message: ''
     }
   }
 
@@ -70,38 +73,45 @@ class ChatHome extends Component {
   render () {
     // returns our chat with the new message in it (JSX objects)
     const messageJsx = this.state.messages.map(message => (
-      <div key={message.id} className="message">{message.content}</div>
+      <Message key={message.id} message={message} />
     ))
 
     return (
       // created divs with classes for our chat form
-      <div className="row">
-        <div className="col-4"></div>
-        <div className="col-8">
-          <div className="col-12">
-            <div className="message-container" style={{ border: '1px solid black' }}>
-              {this.state.messages ? messageJsx : <p>No messages</p>}
-            </div>
+      <div>
+        <div className="row">
+          <RoomInfo />
+        </div>
+        <div className="row">
+          <div className="col-4">
+            <RoomData />
           </div>
-          <div className="col-12 mt-3">
-            <Form onSubmit={this.handleMessage} style={{ display: 'flex' }}>
-              <div className="col-10 p-0 m-0">
-                <Form.Group controlId="formBasicPassword">
-                  <Form.Control
-                    type="text"
-                    placeholder="Write your message"
-                    name="chat_message"
-                    value={this.state.chat_message}
-                    onChange={this.handleChange}
-                  />
-                </Form.Group>
+          <div className="col-8">
+            <div className="col-12">
+              <div className="message-container" style={{ border: '1px solid black' }}>
+                {this.state.messages ? messageJsx : <p>No messages</p>}
               </div>
-              <div className="col-2 p-0 m-0">
-                <Button className="w-100" variant="primary" type="submit">
-                  Send
-                </Button>
-              </div>
-            </Form>
+            </div>
+            <div className="col-12 mt-3">
+              <Form onSubmit={this.handleMessage} style={{ display: 'flex' }}>
+                <div className="col-10 p-0 m-0">
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Control
+                      type="text"
+                      placeholder="Write your message"
+                      name="chat_message"
+                      value={this.state.chat_message}
+                      onChange={this.handleChange}
+                    />
+                  </Form.Group>
+                </div>
+                <div className="col-2 p-0 m-0">
+                  <Button className="w-100" variant="primary" type="submit">
+                    Send
+                  </Button>
+                </div>
+              </Form>
+            </div>
           </div>
         </div>
       </div>
