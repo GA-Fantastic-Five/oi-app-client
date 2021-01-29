@@ -16,6 +16,7 @@ import ChatHome from './components/ChatHome/ChatHome'
 import CreateProfile from './components/Profile/Profile'
 import ProfileShow from './components/Profile/ProfileShow'
 import ProfileIndex from './components/Profile/ProfileIndex'
+import ProfileEdit from './components/Profile/ProfileEdit'
 
 class App extends Component {
   constructor (props) {
@@ -60,16 +61,27 @@ class App extends Component {
           />
         ))}
         <main className="container mt-3">
+          {/* User routes */}
           <Route path='/sign-up' render={() => (
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
+          <AuthenticatedRoute user={user} path='/sign-out' render={() => (
+            <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/change-password' render={() => (
+            <ChangePassword msgAlert={this.msgAlert} user={user} />
+          )} />
+
+          {/* Chat routes */}
           <AuthenticatedRoute user={user} path='/chat' render={() => (
             <ChatHome msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/create-profiles' render={() => (
+
+          {/* Profile routes */}
+          <AuthenticatedRoute user={user} path='/create-profile' render={() => (
             <CreateProfile msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/profiles/:nickname' render={() => (
@@ -78,11 +90,8 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/index-profile' render={() => (
             <ProfileIndex msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/sign-out' render={() => (
-            <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
-          )} />
-          <AuthenticatedRoute user={user} path='/change-password' render={() => (
-            <ChangePassword msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} path='/edit-profile' render={() => (
+            <ProfileEdit msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>

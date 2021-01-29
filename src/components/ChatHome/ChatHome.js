@@ -27,7 +27,7 @@ class ChatHome extends Component {
       // create an empty array [empty chatroom]
       messages: [],
       // set our chat message input to an empty string
-      chat_message: null
+      chat_message: ''
     }
   }
 

@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 // import withRouter so we have access to the match route prop
 import { withRouter, Redirect, Link } from 'react-router-dom'
-import { showProfile } from '../../api/profiles'
+import { showProfile, deleteProfile } from '../../api/profiles'
 
 class ProfileShow extends Component {
   constructor (props) {
     super(props)
     // initially our profiles state will be null, until it is fetched from the api
     this.state = {
-      profiles: null,
+      profile: null,
       deleted: false
     }
   }
@@ -18,7 +18,7 @@ class ProfileShow extends Component {
     // make a request for a single profiles
     showProfile(match.params.nickname, user)
       // set the profiles state, to the profiles we got back in the response's data
-      .then(res => this.setState({ profiles: res.data.profile }))
+      .then(res => this.setState({ profile: res.data.profile }))
       .then(() => msgAlert({
         heading: 'Showing Profile Successfully',
         message: 'The profiles is now displayed.',
@@ -32,29 +32,32 @@ class ProfileShow extends Component {
         })
       })
   }
-  // handleDelete = event => {
-  //   const { user, msgAlert, match } = this.props
-  //   // make a delete axios request
-  //   deleteProfile(match.params.id, user)
-  //     // set the deleted variable to true, to redirect to the profiless page in render
-  //     .then(() => this.setState({ deleted: true }))
-  //     .then(() => msgAlert({
-  //       heading: 'Deleted Profile Successfully!',
-  //       message: 'Profile deleted!',
-  //       variant: 'success'
-  //     }))
-  //     .catch(error => {
-  //       msgAlert({
-  //         heading: 'Deleting Profile Failed',
-  //         message: 'Failed with error: ' + error.message,
-  //         variant: 'danger'
-  //       })
-  //     })
-  // }
+
+  handleDelete = event => {
+    const { user, msgAlert } = this.props
+    // make a delete axios request
+    deleteProfile(user)
+      // set the deleted variable to true, to redirect to the profiless page in render
+      .then(() => this.setState({ deleted: true }))
+      .then(() => msgAlert({
+        heading: 'Deleted Profile Successfully!',
+        message: 'Profile deleted!',
+        variant: 'success'
+      }))
+      .catch(error => {
+        msgAlert({
+          heading: 'Deleting Profile Failed',
+          message: 'Failed with error: ' + error.message,
+          variant: 'danger'
+        })
+      })
+  }
+
   render () {
-    const { profiles, deleted } = this.state
+    const { profile, deleted } = this.state
+    const { user } = this.props
     // if we don't have a profiles yet
-    if (!profiles) {
+    if (!profile) {
       // A Spinner is just a nice loading message we get from react bootstrap
       return (
         <Spinner animation="border" role="status">
@@ -67,14 +70,21 @@ class ProfileShow extends Component {
       // redirect to the profiless index page
       return <Redirect to="/profiles" />
     }
+
+    const buttonsJsx = (
+      <div>
+        <button onClick={this.handleDelete}>Delete Profile</button>
+        <button>
+          <Link to={'/edit-profile'}>Update Profile</Link>
+        </button>
+      </div>
+    )
+
     return (
       <div>
-        <h3>{profiles.nickname}</h3>
-        <button onClick={this.handleDelete}>Delete Profile</button>
-        <button>Update Profile</button>
-        <button>
-          <Link to={`/profiles/${profiles._id}/edit`}>Update Profile</Link>
-        </button>
+        <h3>{profile.nickname}</h3>
+        <img src={profile.avatar} />
+        { user._id === profile.owner && buttonsJsx }
       </div>
     )
   }

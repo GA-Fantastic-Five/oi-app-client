@@ -42,3 +42,13 @@ export const updateProfile = (profile, user) => {
     data: { profile }
   })
 }
+
+export const deleteProfile = user => {
+  return axios({
+    url: apiUrl + '/profile',
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    }
+  })
+}
