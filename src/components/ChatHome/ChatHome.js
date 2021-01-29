@@ -8,6 +8,7 @@ import RoomInfo from '../RoomInfo/RoomInfo'
 // Import react bootstrap
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import ScrollToBottom from 'react-scroll-to-bottom'
 // import Row from 'react-bootstrap/Row'
 // import Col from 'react-bootstrap/Col'
 
@@ -88,9 +89,9 @@ class ChatHome extends Component {
           </div>
           <div className="col-8">
             <div className="col-12">
-              <div className="message-container" style={{ border: '1px solid black' }}>
+              <ScrollToBottom className="message-container" style={{ border: '1px solid black' }}>
                 {this.state.messages ? messageJsx : <p>No messages</p>}
-              </div>
+              </ScrollToBottom>
             </div>
             <div className="col-12 mt-3">
               <Form onSubmit={this.handleMessage} style={{ display: 'flex' }}>
