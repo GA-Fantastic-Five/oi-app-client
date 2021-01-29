@@ -8,12 +8,7 @@ export const createProfile = (profile, user) => {
     headers: {
       'Authorization': `Bearer ${user.token}`
     },
-    data: {
-      profile: {
-        nickname: profile.nickname,
-        avatar: profile.avatar
-      }
-    }
+    data: { profile }
   })
 }
 

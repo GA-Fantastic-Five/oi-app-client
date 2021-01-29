@@ -1,43 +1,42 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import { Profiles } from '../../api/Profiles'
+import { createProfile } from '../../api/profiles'
+import ProfileForm from './ProfileForm'
 class ProfileCreate extends Component {
   constructor (props) {
     super(props)
-    // initially our Profiles nickname and avatar will be empty until they are filled in
+    // initially our profiles title and director will be empty until they are filled in
     this.state = {
-      Profile: {
-        nickname: '',
-        avatar: ''
+      profile: {
+        title: '',
+        director: ''
       },
-      // createdId will be null, until we successfully create a Profile
+      // createdId will be null, until we successfully create a profile
       createdId: null
     }
   }
   handleSubmit = event => {
     event.preventDefault()
     const { user, msgAlert } = this.props
-    const { Profile } = this.state
-    // create a Profile, pass it the Profile data and the user for its token
-    ProfileCreate(Profile, user)
-      // set the createdId to the id of the Profile we just created
-      // .then(res => this.setState({ createdId: res.data.Profile._id }))
+    const { profile } = this.state
+    // create a profile, pass it the profile data and the user for its token
+    createProfile(profile, user)
+      // set the createdId to the id of the profile we just created
+      // .then(res => this.setState({ createdId: res.data.profile._id }))
       .then(res => {
-        this.setState({ createdId: res.data.Profile._id })
-        // pass the response to the next .then so we can show the nickname
+        this.setState({ createdId: res.data.profile._id })
+        // pass the response to the next .then so we can show the title
         return res
       })
       .then(res => msgAlert({
         heading: 'Created Profile Successfully',
-        message: `Profile has been created successfully. Hello There ${res.data.Profile.nickname}.`,
+        message: `Profile has been created successfully. Go Chat ${res.data.profile.nickname}!`,
         variant: 'success'
       }))
       .catch(error => {
         msgAlert({
           heading: 'Failed to Create Profile',
-          message: 'Could not create Profile with error: ' + error.message,
+          message: 'Could not create profile with error: ' + error.message,
           variant: 'danger'
         })
       })
@@ -51,54 +50,29 @@ class ProfileCreate extends Component {
     this.setState(state => {
       // return our state changge
       return {
-        // set the Profile state, to what it used to be (...state.Profile)
+        // set the profile state, to what it used to be (...state.profile)
         // but replace the property with `name` to its current `value`
-        // ex. name could be `nickname` or `avatar`
-        Profile: { ...state.Profile, [event.target.name]: event.target.value }
+        // ex. name could be `title` or `director`
+        profile: { ...state.profile, [event.target.name]: event.target.value }
       }
     })
   }
   render () {
-    // destructure our Profile and createdId state
-    const { Profile, createdId } = this.state
-    // if the Profile has been created and we set its id
+    // destructure our profile and createdId state
+    const { profile, createdId } = this.state
+    // if the profile has been created and we set its id
     if (createdId) {
-      // redirect to the Profiles show page
-      return <Redirect to={`/Profiles/${createdId}`} />
+      // redirect to the profiles show page
+      return <Redirect to={`/profiles/${createdId}`} />
     }
     return (
       <div>
         <h3>Create Profile</h3>
-        <Form onSubmit={this.onSignIn}>
-          <Form.Group controlId="nickname">
-            <Form.Label>Nickname</Form.Label>
-            <Form.Control
-              required
-              type="nickname"
-              name="nickname"
-              value={this.nickname}
-              placeholder="Enter nickname"
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="avatar">
-            <Form.Label>avatar</Form.Label>
-            <Form.Control
-              required
-              name="avatar"
-              value={this.avatar}
-              type="avatar"
-              placeholder="avatar"
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Button
-            variant="primary"
-            type="submit"
-          >
-            Submit
-          </Button>
-        </Form>
+        <ProfileForm
+          profile={profile}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        />
       </div>
     )
   }
