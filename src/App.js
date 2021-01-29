@@ -15,6 +15,7 @@ import ChangePassword from './components/ChangePassword/ChangePassword'
 import ChatHome from './components/ChatHome/ChatHome'
 import CreateProfile from './components/Profile/Profile'
 import ProfileShow from './components/Profile/ProfileShow'
+import ProfileIndex from './components/Profile/ProfileIndex'
 
 class App extends Component {
   constructor (props) {
@@ -73,6 +74,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/show-profile' render={() => (
             <ProfileShow msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/index-profile' render={() => (
+            <ProfileIndex msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
