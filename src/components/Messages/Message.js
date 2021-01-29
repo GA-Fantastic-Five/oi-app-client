@@ -27,7 +27,7 @@ class Message extends Component {
       <Toast>
         <Toast.Header>
           <img src="picture" className="message rounded mr-2" alt="" />
-          <strong className="mr-auto">User Name</strong>
+          <strong className="mr-auto">{message.sender}</strong>
           <small>{new Date().toTimeString()}</small>
         </Toast.Header>
         <Toast.Body>{message.content}</Toast.Body>

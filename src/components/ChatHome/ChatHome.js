@@ -31,7 +31,8 @@ class ChatHome extends Component {
       // create an empty array [empty chatroom]
       messages: [],
       // set our chat message input to an empty string
-      chat_message: ''
+      chat_message: '',
+      sender: ''
     }
   }
 
@@ -52,7 +53,7 @@ class ChatHome extends Component {
         return {
           // returning our message array (prevState.messages), builds a new message with objects unique id(uuid)
           // and the message content
-          messages: [ ...prevState.messages, { id: uuid(), content: message } ]
+          messages: [ ...prevState.messages, { id: uuid(), content: message.message, sender: message.sender } ]
         }
       })
     })
@@ -78,7 +79,8 @@ class ChatHome extends Component {
   }
 
   render () {
-    // returns our chat with the new message in it (JSX objects)
+    // returns our chat with the new message in it (JSX objects) content
+    console.log(this.state.messages)
     const messageJsx = this.state.messages.map(message => (
       <Message key={message.id} message={message} />
     ))
