@@ -50,7 +50,7 @@ class App extends Component {
   }
 
   render () {
-    const { msgAlerts, user } = this.state
+    const { msgAlerts, user, profile } = this.state
 
     return (
       <Fragment>
@@ -82,7 +82,7 @@ class App extends Component {
 
           {/* Chat routes */}
           <AuthenticatedRoute user={user} path='/chat' render={() => (
-            <ChatHome msgAlert={this.msgAlert} user={user} />
+            <ChatHome msgAlert={this.msgAlert} user={user} profile={profile} />
           )} />
 
           {/* Profile routes */}

@@ -37,7 +37,13 @@ class ChatHome extends Component {
 
   componentDidMount () {
     // starts up socket in the client, and passes the connection to our api server
-    io = socketio(endpoint)
+    const { user } = this.props
+    // console.log(profile)
+    io = socketio(endpoint, {
+      query: {
+        token: user._id
+      }
+    })
     // .on sets up a socket event listener
     // when the server emits 'newMessage' client will handle that
     io.on('newMessage', message => {
