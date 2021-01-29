@@ -41,7 +41,7 @@ class ProfileIndex extends Component {
       )
     }
     const profilesJsx = profiles.map(profile => (
-      <Link to={`/profiles/${profile._id}`} key={profile._id}>
+      <Link to={`/profiles/${profile.nickname}`} key={profile._id}>
         <li>
           {profile.nickname}
         </li>
