@@ -1,7 +1,9 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import Spinner from 'react-bootstrap/Spinner'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 import { indexProfiles } from '../../api/profiles'
 
 class ProfileIndex extends Component {
@@ -50,19 +52,20 @@ class ProfileIndex extends Component {
 
     const profilesJsx = profiles.map(profile => (
       <Link to={`/profiles/${profile.nickname}`} key={profile._id}>
-        <li>
+        <Button className="w-100" variant="primary">
           {profile.nickname}
-        </li>
+        </Button>
       </Link>
     ))
 
     return (
-      <Fragment>
+      <div className="index">
         <h3>Profiles</h3>
-        <ul>
-          {profilesJsx}
-        </ul>
-      </Fragment>
+        <Card>
+          <Card.Title>Card Title</Card.Title>
+          <Card.Body>{profilesJsx}</Card.Body>
+        </Card>
+      </div>
     )
   }
 }
