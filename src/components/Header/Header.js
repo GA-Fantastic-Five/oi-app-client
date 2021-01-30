@@ -38,7 +38,7 @@ const Header = ({ user, profile }) => (
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
         { alwaysOptions }
-        { user ? authenticatedOptions(profile.nickname) : unauthenticatedOptions }
+        { user ? authenticatedOptions(profile ? profile.nickname : user.email) : unauthenticatedOptions }
       </Nav>
     </Navbar.Collapse>
   </Navbar>

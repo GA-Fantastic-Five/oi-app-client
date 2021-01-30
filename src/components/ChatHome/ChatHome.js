@@ -30,6 +30,8 @@ class ChatHome extends Component {
     this.state = {
       // create an empty array [empty chatroom]
       messages: [],
+      // track all the users connected to the chat
+      connectedUsers: [],
       // set our chat message input to an empty string
       chat_message: '',
       sender: ''
@@ -39,12 +41,14 @@ class ChatHome extends Component {
   componentDidMount () {
     // starts up socket in the client, and passes the connection to our api server
     const { user } = this.props
+
     // console.log(profile)
     io = socketio(endpoint, {
       query: {
         token: user._id
       }
     })
+
     // .on sets up a socket event listener
     // when the server emits 'newMessage' client will handle that
     io.on('newMessage', message => {
@@ -57,6 +61,38 @@ class ChatHome extends Component {
         }
       })
     })
+
+    io.on('user update', data => {
+      this.setState(prevState => {
+        return {
+          connectedUsers: data
+        }
+      })
+    })
+
+    // io.on('user join', data => {
+    //   this.setState(prevState => {
+    //     return {
+    //       // when a new user joins the chat, the server sends that user's data
+    //       // and we put it in the 'connectedUsers' array in our state
+    //       connectedUsers: [ ...prevState.connectedUsers, { key: uuid(), nickname: data.nickname, avatar: data.avatar } ]
+    //     }
+    //   })
+    // })
+    //
+    // io.on('user leave', data => {
+    //   this.setState(prevState => {
+    //     return {
+    //       // when a new user joins the chat, the server sends that user's data
+    //       // and we put it in the 'connectedUsers' array in our state
+    //       connectedUsers: prevState.splice(user => { return user.owner === data.owner })
+    //     }
+    //   })
+    // })
+  }
+
+  componentWillUnmount () {
+    io.disconnect()
   }
 
   // Create a controlled input
@@ -80,7 +116,6 @@ class ChatHome extends Component {
 
   render () {
     // returns our chat with the new message in it (JSX objects) content
-    console.log(this.state.messages)
     const messageJsx = this.state.messages.map(message => (
       <Message key={message.id} message={message} />
     ))
@@ -92,22 +127,23 @@ class ChatHome extends Component {
           <RoomInfo />
         </div>
         <div className="row">
-          <div className="col-4">
-            <RoomData />
+          <div className="col-12 col-lg-3 col-md-4 col-sm-12">
+            <RoomData connectedUsers={this.state.connectedUsers} />
           </div>
-          <div className="col-8">
-            <div className="col-12">
-              <ScrollToBottom className="message-container" style={{ border: '1px solid black' }}>
+          <div className="col-12 col-lg-9 col-md-8 col-sm-12">
+            <div className="col-12 p-0 m-0">
+              <ScrollToBottom className="message-container border rounded">
                 {this.state.messages ? messageJsx : <p>No messages</p>}
               </ScrollToBottom>
             </div>
-            <div className="col-12 mt-3">
+            <div className="col-12 mt-3 p-0">
               <Form onSubmit={this.handleMessage} style={{ display: 'flex' }}>
                 <div className="col-10 p-0 m-0">
                   <Form.Group controlId="formBasicPassword">
                     <Form.Control
                       type="text"
                       placeholder="Write your message"
+                      style={{ borderRadius: '.25rem 0 0 .25rem', borderRight: 'transparent' }}
                       name="chat_message"
                       value={this.state.chat_message}
                       onChange={this.handleChange}
@@ -115,7 +151,12 @@ class ChatHome extends Component {
                   </Form.Group>
                 </div>
                 <div className="col-2 p-0 m-0">
-                  <Button className="w-100" variant="primary" type="submit">
+                  <Button
+                    className="w-100"
+                    variant="primary"
+                    type="submit"
+                    style={{ borderRadius: '0 .25rem .25rem 0' }}
+                  >
                     Send
                   </Button>
                 </div>
