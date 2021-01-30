@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
+import './App.scss'
 
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
@@ -13,6 +14,7 @@ import ChangePassword from './components/ChangePassword/ChangePassword'
 
 // Chat home
 import ChatHome from './components/ChatHome/ChatHome'
+import Home from './components/Home/Home'
 import CreateProfile from './components/Profile/Profile'
 import ProfileShow from './components/Profile/ProfileShow'
 import ProfileIndex from './components/Profile/ProfileIndex'
@@ -66,6 +68,10 @@ class App extends Component {
           />
         ))}
         <main className="container mt-3">
+          {/* Home route */}
+          <Route path='/' render={() => (
+            <Home msgAlert={this.msgAlert} setUser={this.setUser} setProfile={this.setProfile} />
+          )} />
           {/* User routes */}
           <Route path='/sign-up' render={() => (
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} setProfile={this.setProfile} />
