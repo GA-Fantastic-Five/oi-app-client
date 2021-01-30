@@ -1,10 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
+
 import { createProfile } from '../../api/profiles'
 import ProfileForm from './ProfileForm'
+
 class ProfileCreate extends Component {
   constructor (props) {
     super(props)
+
     // initially our profiles title and director will be empty until they are filled in
     this.state = {
       profile: {
@@ -18,8 +21,10 @@ class ProfileCreate extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+
     const { user, msgAlert } = this.props
     const { profile } = this.state
+
     // create a profile, pass it the profile data and the user for its token
     createProfile(profile, user)
       // set the createdId to the id of the profile we just created
@@ -57,6 +62,8 @@ class ProfileCreate extends Component {
     // to ensure the properties are not set to null after handleChange is finished
     // we must call event.persist
     event.persist()
+
+    // change the state
     this.setState(state => {
       // return our state changge
       return {
@@ -71,21 +78,25 @@ class ProfileCreate extends Component {
   render () {
     // destructure our profile and createdId state
     const { profile, created } = this.state
+
     // if the profile has been created and we set its id
     if (created) {
       // redirect to the profiles show page
       return <Redirect to={`/profiles/${profile.nickname}`} />
     }
+
     return (
-      <div>
+      <Fragment>
         <h3>Create Profile</h3>
+
         <ProfileForm
           profile={profile}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
-      </div>
+      </Fragment>
     )
   }
 }
+
 export default ProfileCreate
