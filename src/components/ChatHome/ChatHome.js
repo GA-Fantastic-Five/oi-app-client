@@ -34,7 +34,8 @@ class ChatHome extends Component {
       connectedUsers: [],
       // set our chat message input to an empty string
       chat_message: '',
-      sender: ''
+      sender: '',
+      users: []
     }
   }
 
@@ -57,7 +58,7 @@ class ChatHome extends Component {
         return {
           // returning our message array (prevState.messages), builds a new message with objects unique id(uuid)
           // and the message content
-          messages: [ ...prevState.messages, { id: uuid(), content: message.message, sender: message.sender } ]
+          messages: [ ...prevState.messages, { id: uuid(), content: message.message, sender: message.sender, time: message.time } ]
         }
       })
     })
@@ -110,6 +111,8 @@ class ChatHome extends Component {
       .then(io.emit('message', this.state.chat_message))
       // setting the state so that the message input is once again cleared
       .then(this.setState({ chat_message: '' }))
+      .then(this.setState({ sender: '' }))
+      .then(this.setState({ time: '' }))
       // catch an error
       .catch(console.error)
   }
