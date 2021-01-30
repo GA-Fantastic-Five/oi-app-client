@@ -33,6 +33,10 @@ class App extends Component {
 
   setProfile = profile => this.setState({ profile })
 
+  // Combining setUser and setProfile to avoid rendering twice and not having
+  // the profile data ready.
+  setUserProfile = data => this.setState({ user: data.user, profile: data.profile })
+
   clearUser = () => this.setState({ user: null })
 
   clearProfile = () => this.setState({ profile: null })
@@ -55,7 +59,7 @@ class App extends Component {
 
     return (
       <Fragment>
-        <Header user={user} />
+        <Header user={user} profile={profile} />
         {msgAlerts.map(msgAlert => (
           <AutoDismissAlert
             key={msgAlert.id}
@@ -74,7 +78,7 @@ class App extends Component {
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} setProfile={this.setProfile} />
           )} />
           <Route path='/sign-in' render={() => (
-            <SignIn msgAlert={this.msgAlert} setUser={this.setUser} setProfile={this.setProfile} />
+            <SignIn msgAlert={this.msgAlert} setUserProfile={this.setUserProfile} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} clearProfile={this.clearProfile} user={user} />
@@ -107,7 +111,7 @@ class App extends Component {
             <CreateProfile msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/profile/edit' render={() => (
-            <EditProfile msgAlert={this.msgAlert} user={user} />
+            <EditProfile msgAlert={this.msgAlert} user={user} setProfile={this.setProfile} />
           )} />
 
         </main>

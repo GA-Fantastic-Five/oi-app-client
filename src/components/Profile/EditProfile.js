@@ -22,18 +22,18 @@ class ProfileCreate extends Component {
   handleSubmit = event => {
     event.preventDefault()
 
-    const { user, msgAlert } = this.props
+    const { user, msgAlert, setProfile } = this.props
     const { profile } = this.state
 
     // create a profile, pass it the profile data and the user for its token
     updateProfile(profile, user)
       // set the createdId to the id of the profile we just created
-      // .then(res => this.setState({ createdId: res.data.profile._id }))
       .then(res => {
         this.setState({ updated: true })
         // pass the response to the next .then so we can show the title
         return res
       })
+      .then(res => setProfile(res.data.profile))
       .then(res => msgAlert({
         heading: 'Profile Successfully Updated',
         message: 'Profile has been successfully updated.',

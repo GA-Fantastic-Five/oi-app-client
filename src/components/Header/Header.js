@@ -1,21 +1,25 @@
 import React, { Fragment } from 'react'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 
-const authenticatedOptions = (
+const authenticatedOptions = userEmail => (
   <Fragment>
     <Nav.Link href="#chat">Chat</Nav.Link>
-    <Nav.Link href="#profile/create">Create Profile</Nav.Link>
     <Nav.Link href="#profiles">Profiles</Nav.Link>
-    <Nav.Link href="#change-password">Change Password</Nav.Link>
-    <Nav.Link href="#sign-out">Sign Out</Nav.Link>
+    <NavDropdown title={userEmail} id="basic-nav-dropdown">
+      <NavDropdown.Item href="#profile/create">Create Profile</NavDropdown.Item>
+      <NavDropdown.Item href="#change-password">Change Password</NavDropdown.Item>
+      <NavDropdown.Divider />
+      <NavDropdown.Item href="#sign-out">Sign Out</NavDropdown.Item>
+    </NavDropdown>
   </Fragment>
 )
 
 const unauthenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#sign-up">Sign Up</Nav.Link>
-    <Nav.Link href="#sign-in">Sign In</Nav.Link>
+    <Nav>
+      <Nav.Link href="#sign-up">Sign Up</Nav.Link>
+      <Nav.Link href="#sign-in">Sign In</Nav.Link>
+    </Nav>
   </Fragment>
 )
 
@@ -25,7 +29,7 @@ const alwaysOptions = (
   </Fragment>
 )
 
-const Header = ({ user }) => (
+const Header = ({ user, profile }) => (
   <Navbar bg="primary" variant="dark" expand="md">
     <Navbar.Brand href="#">
       oi-app-client
@@ -33,9 +37,8 @@ const Header = ({ user }) => (
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
-        { user && <span className="navbar-text mr-2">Welcome, {user.email}</span>}
         { alwaysOptions }
-        { user ? authenticatedOptions : unauthenticatedOptions }
+        { user ? authenticatedOptions(profile.nickname) : unauthenticatedOptions }
       </Nav>
     </Navbar.Collapse>
   </Navbar>

@@ -1,1 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
+
+// Styling the nav dropdown so that it's to the left of the button instead
+// of the right which causes it to be off-screen.
+.dropdown-menu.show {
+  left: -100%
+}

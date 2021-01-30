@@ -25,15 +25,14 @@ class SignIn extends Component {
   onSignIn = event => {
     event.preventDefault()
 
-    const { msgAlert, history, setUser, setProfile } = this.props
+    const { msgAlert, history, setUserProfile } = this.props
+    const userProfileData = {}
 
     signIn(this.state)
-      .then(res => {
-        setUser(res.data.user)
-        return res.data.user
-      })
-      .then(res => getUserProfile(res))
-      .then(res => setProfile(res.data.profile))
+      .then(res => { userProfileData.user = res.data.user })
+      .then(res => getUserProfile(userProfileData.user))
+      .then(res => { userProfileData.profile = res.data.profile })
+      .then(res => setUserProfile(userProfileData))
       .then(() => msgAlert({
         heading: 'Sign In Success',
         message: messages.signInSuccess,
