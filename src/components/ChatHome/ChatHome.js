@@ -32,7 +32,8 @@ class ChatHome extends Component {
       messages: [],
       // set our chat message input to an empty string
       chat_message: '',
-      sender: ''
+      sender: '',
+      users: []
     }
   }
 
@@ -53,7 +54,7 @@ class ChatHome extends Component {
         return {
           // returning our message array (prevState.messages), builds a new message with objects unique id(uuid)
           // and the message content
-          messages: [ ...prevState.messages, { id: uuid(), content: message.message, sender: message.sender } ]
+          messages: [ ...prevState.messages, { id: uuid(), content: message.message, sender: message.sender, time: message.time } ]
         }
       })
     })
@@ -74,6 +75,8 @@ class ChatHome extends Component {
       .then(io.emit('message', this.state.chat_message))
       // setting the state so that the message input is once again cleared
       .then(this.setState({ chat_message: '' }))
+      .then(this.setState({ sender: '' }))
+      .then(this.setState({ time: '' }))
       // catch an error
       .catch(console.error)
   }
@@ -81,6 +84,8 @@ class ChatHome extends Component {
   render () {
     // returns our chat with the new message in it (JSX objects) content
     console.log(this.state.messages)
+    console.log(this.props.user)
+    console.log(this.props.profile)
     const messageJsx = this.state.messages.map(message => (
       <Message key={message.id} message={message} />
     ))
@@ -93,7 +98,7 @@ class ChatHome extends Component {
         </div>
         <div className="row">
           <div className="col-4">
-            <RoomData />
+            <RoomData profile={this.props.profile}/>
           </div>
           <div className="col-8">
             <div className="col-12">

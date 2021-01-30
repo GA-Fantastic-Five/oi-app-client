@@ -10,25 +10,14 @@ class Message extends Component {
     }
   }
 
-  // if (user === user) {
-  //   this.state.sentByUser = true
-  // }
-
   render () {
     const { message } = this.props
     return (
-    // this.state.sentByUser
-    //   ? (
-    //     <div className="message">{message.content}</div>
-    //   )
-    //   : (
-    //     <div className="message">{message.content}</div>
-    //   )
       <Toast>
         <Toast.Header>
           <img src="picture" className="message rounded mr-2" alt="" />
           <strong className="mr-auto">{message.sender}</strong>
-          <small>{new Date().toTimeString()}</small>
+          <small>{message.time}</small>
         </Toast.Header>
         <Toast.Body>{message.content}</Toast.Body>
       </Toast>
