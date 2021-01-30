@@ -1,10 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
+
 import { updateProfile } from '../../api/profiles'
 import ProfileForm from './ProfileForm'
+
 class ProfileCreate extends Component {
   constructor (props) {
     super(props)
+
     // initially our profiles title and director will be empty until they are filled in
     this.state = {
       profile: {
@@ -18,17 +21,19 @@ class ProfileCreate extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    const { user, msgAlert } = this.props
+
+    const { user, msgAlert, setProfile } = this.props
     const { profile } = this.state
+
     // create a profile, pass it the profile data and the user for its token
     updateProfile(profile, user)
       // set the createdId to the id of the profile we just created
-      // .then(res => this.setState({ createdId: res.data.profile._id }))
       .then(res => {
         this.setState({ updated: true })
         // pass the response to the next .then so we can show the title
         return res
       })
+      .then(res => setProfile(res.data.profile))
       .then(res => msgAlert({
         heading: 'Profile Successfully Updated',
         message: 'Profile has been successfully updated.',
@@ -49,6 +54,7 @@ class ProfileCreate extends Component {
     // to ensure the properties are not set to null after handleChange is finished
     // we must call event.persist
     event.persist()
+
     this.setState(state => {
       // return our state changge
       return {
@@ -70,15 +76,16 @@ class ProfileCreate extends Component {
     }
 
     return (
-      <div>
+      <Fragment>
         <h3>Edit Profile</h3>
         <ProfileForm
           profile={profile}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
-      </div>
+      </Fragment>
     )
   }
 }
+
 export default ProfileCreate

@@ -1,20 +1,25 @@
-import React, { Component } from 'react'
-import Spinner from 'react-bootstrap/Spinner'
-// import withRouter so we have access to the match route prop
+import React, { Component, Fragment } from 'react'
+
+// Import withRouter to have access to "history"
 import { withRouter, Redirect, Link } from 'react-router-dom'
+
+import Spinner from 'react-bootstrap/Spinner'
 import { showProfile, deleteProfile } from '../../api/profiles'
 
 class ProfileShow extends Component {
   constructor (props) {
     super(props)
+
     // initially our profiles state will be null, until it is fetched from the api
     this.state = {
       profile: null,
       deleted: false
     }
   }
+
   componentDidMount () {
     const { user, match, msgAlert } = this.props
+
     // make a request for a single profiles
     showProfile(match.params.nickname, user)
       // set the profiles state, to the profiles we got back in the response's data
@@ -35,6 +40,7 @@ class ProfileShow extends Component {
 
   handleDelete = event => {
     const { user, msgAlert, clearProfile } = this.props
+
     // make a delete axios request
     deleteProfile(user)
       // set the deleted variable to true, to redirect to the profiless page in render
@@ -57,6 +63,7 @@ class ProfileShow extends Component {
   render () {
     const { profile, deleted } = this.state
     const { user } = this.props
+
     // if we don't have a profiles yet
     if (!profile) {
       // A Spinner is just a nice loading message we get from react bootstrap
@@ -66,6 +73,7 @@ class ProfileShow extends Component {
         </Spinner>
       )
     }
+
     // if the profiles is deleted
     if (deleted) {
       // redirect to the profiless index page
@@ -76,18 +84,19 @@ class ProfileShow extends Component {
       <div>
         <button onClick={this.handleDelete}>Delete Profile</button>
         <button>
-          <Link to={'/edit-profile'}>Update Profile</Link>
+          <Link to={'/profile/edit'}>Update Profile</Link>
         </button>
       </div>
     )
 
     return (
-      <div>
+      <Fragment>
         <h3>{profile.nickname}</h3>
         <img src={profile.avatar} />
         { user._id === profile.owner && buttonsJsx }
-      </div>
+      </Fragment>
     )
   }
 }
+
 export default withRouter(ProfileShow)

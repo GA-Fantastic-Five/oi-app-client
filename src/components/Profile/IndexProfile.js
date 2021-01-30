@@ -1,18 +1,23 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
+
 import Spinner from 'react-bootstrap/Spinner'
 import { indexProfiles } from '../../api/profiles'
+
 class ProfileIndex extends Component {
   constructor (props) {
     super(props)
+
     // keep track of the profiles in our application
     // initially they will be null until we have fetched them from the api
     this.state = {
       profiles: null
     }
   }
+
   componentDidMount () {
     const { msgAlert, user } = this.props
+
     indexProfiles(user)
       .then(res => this.setState({ profiles: res.data.profiles }))
       .then(() => msgAlert({
@@ -27,9 +32,11 @@ class ProfileIndex extends Component {
         })
       })
   }
+
   render () {
     // destructure our profiles state
     const { profiles } = this.state
+
     // if we haven't fetched any profiles yet from the API
     if (!profiles) {
       // A Spinner is just a nice loading message we get from react bootstrap
@@ -40,6 +47,7 @@ class ProfileIndex extends Component {
 
       )
     }
+
     const profilesJsx = profiles.map(profile => (
       <Link to={`/profiles/${profile.nickname}`} key={profile._id}>
         <li>
@@ -47,14 +55,16 @@ class ProfileIndex extends Component {
         </li>
       </Link>
     ))
+
     return (
-      <div>
+      <Fragment>
         <h3>Profiles</h3>
         <ul>
           {profilesJsx}
         </ul>
-      </div>
+      </Fragment>
     )
   }
 }
+
 export default ProfileIndex

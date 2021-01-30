@@ -9,14 +9,15 @@ import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
-// import Dash from './components/SideNav/Dash'
 
-// Chat home
+// Importing the chat page component
 import ChatHome from './components/ChatHome/ChatHome'
-import CreateProfile from './components/Profile/Profile'
-import ProfileShow from './components/Profile/ProfileShow'
-import ProfileIndex from './components/Profile/ProfileIndex'
-import ProfileEdit from './components/Profile/ProfileEdit'
+
+// Importing the profile pages components
+import CreateProfile from './components/Profile/CreateProfile'
+import ShowProfile from './components/Profile/ShowProfile'
+import IndexProfile from './components/Profile/IndexProfile'
+import EditProfile from './components/Profile/EditProfile'
 
 class App extends Component {
   constructor (props) {
@@ -31,6 +32,10 @@ class App extends Component {
   setUser = user => this.setState({ user })
 
   setProfile = profile => this.setState({ profile })
+
+  // Combining setUser and setProfile to avoid rendering twice and not having
+  // the profile data ready.
+  setUserProfile = data => this.setState({ user: data.user, profile: data.profile })
 
   clearUser = () => this.setState({ user: null })
 
@@ -54,7 +59,7 @@ class App extends Component {
 
     return (
       <Fragment>
-        <Header user={user} />
+        <Header user={user} profile={profile} />
         {msgAlerts.map(msgAlert => (
           <AutoDismissAlert
             key={msgAlert.id}
@@ -65,13 +70,15 @@ class App extends Component {
             deleteAlert={this.deleteAlert}
           />
         ))}
+
         <main className="container mt-3">
+
           {/* User routes */}
           <Route path='/sign-up' render={() => (
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} setProfile={this.setProfile} />
           )} />
           <Route path='/sign-in' render={() => (
-            <SignIn msgAlert={this.msgAlert} setUser={this.setUser} setProfile={this.setProfile} />
+            <SignIn msgAlert={this.msgAlert} setUserProfile={this.setUserProfile} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} clearProfile={this.clearProfile} user={user} />
@@ -85,19 +92,28 @@ class App extends Component {
             <ChatHome msgAlert={this.msgAlert} user={user} profile={profile} />
           )} />
 
-          {/* Profile routes */}
-          <AuthenticatedRoute user={user} path='/create-profile' render={() => (
-            <CreateProfile msgAlert={this.msgAlert} user={user} />
+          {/*
+              Profile Routes
+
+              All the routes with "/profiles/" signifies that you are interacting
+              with a foreign profile, not your own.
+
+              All the routes with "/profile/" signfiies that you are interacting
+              with your own personal profile.
+          */}
+          <AuthenticatedRoute user={user} exact path='/profiles' render={() => (
+            <IndexProfile msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/profiles/:nickname' render={() => (
-            <ProfileShow msgAlert={this.msgAlert} user={user} clearProfile={this.clearProfile} />
+            <ShowProfile msgAlert={this.msgAlert} user={user} clearProfile={this.clearProfile} />
           )} />
-          <AuthenticatedRoute user={user} path='/index-profile' render={() => (
-            <ProfileIndex msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} path='/profile/create' render={() => (
+            <CreateProfile msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/edit-profile' render={() => (
-            <ProfileEdit msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} path='/profile/edit' render={() => (
+            <EditProfile msgAlert={this.msgAlert} user={user} setProfile={this.setProfile} />
           )} />
+
         </main>
       </Fragment>
     )
