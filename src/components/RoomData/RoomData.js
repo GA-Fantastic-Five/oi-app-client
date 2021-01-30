@@ -9,7 +9,7 @@ class RoomData extends Component {
   }
   render () {
     return (
-      <div>Connected Users</div>
+      <div>{this.props.profile.nickname}</div>
     )
   }
 }

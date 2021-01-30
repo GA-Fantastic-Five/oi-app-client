@@ -31,13 +31,21 @@ class ChatHome extends Component {
       // create an empty array [empty chatroom]
       messages: [],
       // set our chat message input to an empty string
-      chat_message: ''
+      chat_message: '',
+      sender: '',
+      users: []
     }
   }
 
   componentDidMount () {
     // starts up socket in the client, and passes the connection to our api server
-    io = socketio(endpoint)
+    const { user } = this.props
+    // console.log(profile)
+    io = socketio(endpoint, {
+      query: {
+        token: user._id
+      }
+    })
     // .on sets up a socket event listener
     // when the server emits 'newMessage' client will handle that
     io.on('newMessage', message => {
@@ -46,7 +54,7 @@ class ChatHome extends Component {
         return {
           // returning our message array (prevState.messages), builds a new message with objects unique id(uuid)
           // and the message content
-          messages: [ ...prevState.messages, { id: uuid(), content: message } ]
+          messages: [ ...prevState.messages, { id: uuid(), content: message.message, sender: message.sender, time: message.time } ]
         }
       })
     })
@@ -67,12 +75,17 @@ class ChatHome extends Component {
       .then(io.emit('message', this.state.chat_message))
       // setting the state so that the message input is once again cleared
       .then(this.setState({ chat_message: '' }))
+      .then(this.setState({ sender: '' }))
+      .then(this.setState({ time: '' }))
       // catch an error
       .catch(console.error)
   }
 
   render () {
-    // returns our chat with the new message in it (JSX objects)
+    // returns our chat with the new message in it (JSX objects) content
+    console.log(this.state.messages)
+    console.log(this.props.user)
+    console.log(this.props.profile)
     const messageJsx = this.state.messages.map(message => (
       <Message key={message.id} message={message} />
     ))
@@ -85,7 +98,7 @@ class ChatHome extends Component {
         </div>
         <div className="row">
           <div className="col-4">
-            <RoomData />
+            <RoomData profile={this.props.profile}/>
           </div>
           <div className="col-8">
             <div className="col-12">
