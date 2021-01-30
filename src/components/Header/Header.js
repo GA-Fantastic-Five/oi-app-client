@@ -1,25 +1,22 @@
 import React, { Fragment } from 'react'
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import Logo from './logosm.jpg'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
 
-const authenticatedOptions = userEmail => (
+const authenticatedOptions = (
   <Fragment>
     <Nav.Link href="#chat">Chat</Nav.Link>
-    <Nav.Link href="#profiles">Profiles</Nav.Link>
-    <NavDropdown title={userEmail} id="basic-nav-dropdown">
-      <NavDropdown.Item href="#profile/create">Create Profile</NavDropdown.Item>
-      <NavDropdown.Item href="#change-password">Change Password</NavDropdown.Item>
-      <NavDropdown.Divider />
-      <NavDropdown.Item href="#sign-out">Sign Out</NavDropdown.Item>
-    </NavDropdown>
+    <Nav.Link href="#create-profile">Profiles</Nav.Link>
+    <Nav.Link href="#index-profile">See Your Profiles</Nav.Link>
+    <Nav.Link href="#change-password">Change Password</Nav.Link>
+    <Nav.Link href="#sign-out">Sign Out</Nav.Link>
   </Fragment>
 )
 
 const unauthenticatedOptions = (
   <Fragment>
-    <Nav>
-      <Nav.Link href="#sign-up">Sign Up</Nav.Link>
-      <Nav.Link href="#sign-in">Sign In</Nav.Link>
-    </Nav>
+    <Nav.Link href="#sign-up">Sign Up</Nav.Link>
+    <Nav.Link href="#sign-in">Sign In</Nav.Link>
   </Fragment>
 )
 
@@ -29,16 +26,17 @@ const alwaysOptions = (
   </Fragment>
 )
 
-const Header = ({ user, profile }) => (
+const Header = ({ user }) => (
   <Navbar bg="primary" variant="dark" expand="md">
     <Navbar.Brand href="#">
-      Oi
+      <img src={Logo}/>
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
+        { user && <span className="navbar-text mr-2">Welcome, {user.email}</span>}
         { alwaysOptions }
-        { user ? authenticatedOptions(profile ? profile.nickname : user.email) : unauthenticatedOptions }
+        { user ? authenticatedOptions : unauthenticatedOptions }
       </Nav>
     </Navbar.Collapse>
   </Navbar>
