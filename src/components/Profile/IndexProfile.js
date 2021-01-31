@@ -59,10 +59,10 @@ class ProfileIndex extends Component {
     ))
 
     return (
-      <div className="index">
+      <div>
         <h3>Profiles</h3>
-        <Card>
-          <Card.Title>Card Title</Card.Title>
+        <Card className="index">
+          <Card.Title>See Who Is Availible</Card.Title>
           <Card.Body>{profilesJsx}</Card.Body>
         </Card>
       </div>
