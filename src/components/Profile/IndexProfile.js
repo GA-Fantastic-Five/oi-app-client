@@ -62,7 +62,7 @@ class ProfileIndex extends Component {
       <div>
         <h3>Profiles</h3>
         <Card className="index">
-          <Card.Title>See Who Is Availible</Card.Title>
+          <Card.Title>See Who Is Available</Card.Title>
           <Card.Body>{profilesJsx}</Card.Body>
         </Card>
       </div>
