@@ -139,11 +139,11 @@ class ChatHome extends Component {
                     style={{ borderRadius: '0 .25rem .25rem 0' }}
                   >
                     Send
-                  </Button>
-                </div>
-              </Form>
-            </div>
+                </Button>
+              </div>
+            </Form>
           </div>
+
         </div>
       </div>
     )

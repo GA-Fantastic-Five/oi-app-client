@@ -1,6 +1,18 @@
 .message-container {
-  background: #fff;
+  background: url('logo2.jpg');
+  border: 10px solid $primary;
+  border-radius: 5px solid white;
   height: 400px;
+  background-position: center;
+  background-size: cover;
+  overflow-y: hidden;
+
+}
+// .mr-auto1 {
+//   color: $primary;
+// }
+.mr-auto2 {
+  color: $primary;
 }
 
 .chat-sidenav {

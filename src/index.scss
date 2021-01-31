@@ -26,6 +26,47 @@ body {
   height: 24px;
 }
 
+.container.mt-3{
+  color: $primary;
+  font-weight: 200;
+}
+div{
+
+
+// .col12.col-lg-3.col-md-4.col-sm-12 {
+//   border: 15px solid $primary;
+// }
+// .col-12.col-lg-9.col-md-8.col-sm-12{
+//   border: 10px solid $primary;
+// }
+// .chat-sidenav.border.rounded {
+//   border: 15px solid $primary;
+// }
+.chat-sidenav {
+        max-height: 200px;
+        align-content: center;
+}
+.p-0 {
+        padding: 0 !important;
+}
+
+
+.m-0 {
+        margin: 0 !important;
+}
+
+.col-12 {
+        border: 15px solid $primary;
+        flex: auto;
+        /* max-width: 60%; */
+        padding-right: 50px;
+}
+}
+
+.col-sm-10.col-md-8.mx-auto.mt-5 {
+  font-weight: 300;
+}
+
 // Styling the nav dropdown so that it's to the left of the button instead
 // of the right which causes it to be off-screen.
 .dropdown-menu.show {
