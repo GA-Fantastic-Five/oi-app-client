@@ -1,14 +1,15 @@
-$primary: #D9304F;
+$primary: #54c0b2;
 $secondary: #FFF600;
 $danger: #FF1DC0;
 @import '~bootstrap/scss/bootstrap';
 
-$backgroundImageUrl: 'https://media4.giphy.com/media/l41JRkXhSia9r1M9a/200w.webp?cid=ecf05e4772adda599465413c95bfb62522e8a4feaca01c4a&rid=200w.webp';
+$backgroundImageUrl: 'https://www.xmple.com/wallpaper/green-purple-gradient-linear-1920x1080-c2-ba55d3-00fa9a-a-45-f-14.svg';
 body {
-  background-image: url($backgroundImageUrl);
+  background: url($backgroundImageUrl) no-repeat center center fixed;
   background-size: cover;
-  background-position: center;
-  height: 100vh;
+  // background-position: center;
+  // height: 100vh;
+
 }
 .home {
   display: flex;

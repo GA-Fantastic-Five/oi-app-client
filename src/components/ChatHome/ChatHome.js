@@ -125,47 +125,46 @@ class ChatHome extends Component {
 
     return (
       // created divs with classes for our chat form
-      <div>
-        <div className="row">
+      <div classID="chat">
+        <div className="row-info">
           <RoomInfo />
         </div>
-        <div className="row">
-          <div className="col-12 col-lg-3 col-md-4 col-sm-12">
-            <RoomData connectedUsers={this.state.connectedUsers} />
+        <div className="row-connect">
+
+          <RoomData connectedUsers={this.state.connectedUsers} />
+
+          <div className="col-12 p-0 m-0">
+            <ScrollToBottom className="message-container border rounded">
+              {this.state.messages ? messageJsx : <p>No messages</p>}
+            </ScrollToBottom>
           </div>
-          <div className="col-12 col-lg-9 col-md-8 col-sm-12">
-            <div className="col-12 p-0 m-0">
-              <ScrollToBottom className="message-container border rounded">
-                {this.state.messages ? messageJsx : <p>No messages</p>}
-              </ScrollToBottom>
-            </div>
-            <div className="col-12 mt-3 p-0">
-              <Form onSubmit={this.handleMessage} style={{ display: 'flex' }}>
-                <div className="col-10 p-0 m-0">
-                  <Form.Group controlId="formBasicPassword">
-                    <Form.Control
-                      type="text"
-                      placeholder="Write your message"
-                      style={{ borderRadius: '.25rem 0 0 .25rem', borderRight: 'transparent' }}
-                      name="chat_message"
-                      value={this.state.chat_message}
-                      onChange={this.handleChange}
-                    />
-                  </Form.Group>
-                </div>
-                <div className="col-2 p-0 m-0">
-                  <Button
-                    className="w-100"
-                    variant="primary"
-                    type="submit"
-                    style={{ borderRadius: '0 .25rem .25rem 0' }}
-                  >
+          <div className="col-10 mt-3 p-0">
+            <Form onSubmit={this.handleMessage} style={{ display: 'flex' }}>
+              <div className="col-10 p-0 m-0">
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Control
+                    type="text"
+                    placeholder="Write your message"
+                    style={{ borderRadius: '.25rem 0 0 .25rem', borderRight: 'transparent' }}
+                    name="chat_message"
+                    value={this.state.chat_message}
+                    onChange={this.handleChange}
+                  />
+                </Form.Group>
+              </div>
+              <div className="col-2 p-0 m-0">
+                <Button
+                  className="w-100"
+                  variant="primary"
+                  type="submit"
+                  style={{ borderRadius: '0 .25rem .25rem 0' }}
+                >
                     Send
-                  </Button>
-                </div>
-              </Form>
-            </div>
+                </Button>
+              </div>
+            </Form>
           </div>
+
         </div>
       </div>
     )

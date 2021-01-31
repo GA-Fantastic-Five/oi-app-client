@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import Logo from './logosm.jpg'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 
 const authenticatedOptions = userEmail => (
@@ -30,9 +31,9 @@ const alwaysOptions = (
 )
 
 const Header = ({ user, profile }) => (
-  <Navbar bg="primary" variant="dark" expand="md">
+  <Navbar style={{ backgroundBlendMode: 'screen' }} bg="primary" variant="dark" expand="md">
     <Navbar.Brand href="#">
-      Oi
+      <img src={Logo}></img>
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">

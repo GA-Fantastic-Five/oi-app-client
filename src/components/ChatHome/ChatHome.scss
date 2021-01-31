@@ -1,11 +1,14 @@
+// @import 'logo2.jpg';
 $primary: #D9304F;
 $secondary: #7b87bc;
 $danger: #FF1DC0;
 .message-container {
-  background: $secondary;
+  background: url('logo2.jpg');
   border: 10px solid $primary;
   border-radius: 5px solid white;
   height: 400px;
+  background-position: center;
+  background-size: cover;
   overflow-y: hidden;
 
 }
