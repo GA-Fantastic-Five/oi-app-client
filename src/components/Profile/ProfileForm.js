@@ -2,10 +2,11 @@ import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 const ProfileForm = ({ profile, handleSubmit, handleChange }) => (
-  <Form onSubmit={handleSubmit}>
+  <Form className="showProfile"
+    onSubmit={handleSubmit}>
     <Form.Group>
       <Form.Label>Nickname</Form.Label>
-      <Form.Control
+      <Form.Control className= "input"
         placeholder='Got A Name?'
         // This name should line up with the state we want to change
         // name='nickname'

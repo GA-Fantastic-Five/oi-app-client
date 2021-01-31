@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 
 // Import withRouter to have access to "history"
 import { withRouter, Redirect, Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 import Spinner from 'react-bootstrap/Spinner'
 import { showProfile, deleteProfile } from '../../api/profiles'
@@ -82,18 +83,22 @@ class ProfileShow extends Component {
 
     const buttonsJsx = (
       <div>
-        <button onClick={this.handleDelete}>Delete Profile</button>
-        <button>
+        <Button variant="primary" onClick={this.handleDelete}>Delete Profile</Button>
+        <Button variant="primary">
           <Link to={'/profile/edit'}>Update Profile</Link>
-        </button>
+        </Button>
       </div>
     )
 
     return (
       <Fragment>
-        <h3>{profile.nickname}</h3>
-        <img src={profile.avatar} />
-        { user._id === profile.owner && buttonsJsx }
+        <div className="displayProfile">
+          <h3>Nickname: {profile.nickname}</h3>
+          <h3> Your Avatar:
+            <img className="img-size" src={profile.avatar} />
+          </h3>
+          { user._id === profile.owner && buttonsJsx }
+        </div>
       </Fragment>
     )
   }
