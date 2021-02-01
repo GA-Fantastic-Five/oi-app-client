@@ -1,19 +1,6 @@
-$primary: #D9304F;
-$secondary: #7b87bc;
-$danger: #FF1DC0;
 .message-container {
-  background: $secondary;
-  border: 10px solid $primary;
-  border-radius: 5px solid white;
+  background: #fff;
   height: 400px;
-  overflow-y: hidden;
-
-}
-// .mr-auto1 {
-//   color: $primary;
-// }
-.mr-auto2 {
-  color: $primary;
 }
 
 .chat-sidenav {

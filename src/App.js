@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
-import './App.scss'
 
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
@@ -73,19 +72,45 @@ class App extends Component {
           />
         ))}
 
-        <main className="container mt-3">
+        <main className="container" style={{ marginTop: '2rem' }}>
 
-          {/* Home route */}
-          <Route path='/' render={() => (
-            <Home msgAlert={this.msgAlert} setUser={this.setUser} setProfile={this.setProfile} />
+          {/*
+            Home route
+
+            Displays both the unauthorized and authorized home component. The home
+            route checks if the user is signed in or not and displays the correct
+            jsx accordingly.
+          */}
+          <Route exact path='/' render={() => (
+            <Home
+              msgAlert={this.msgAlert}
+              user={user}
+              setUser={this.setUser}
+              setProfile={this.setProfile}
+              setUserProfile={this.setUserProfile}
+            />
           )} />
 
           {/* User routes */}
           <Route path='/sign-up' render={() => (
-            <SignUp msgAlert={this.msgAlert} setUser={this.setUser} setProfile={this.setProfile} />
+            <div className="row">
+              <div className="col-sm-10 col-md-6 mx-auto">
+                <div className="section-title">Sign Up</div>
+                <div className="box">
+                  <SignUp msgAlert={this.msgAlert} setUser={this.setUser} setProfile={this.setProfile} />
+                </div>
+              </div>
+            </div>
           )} />
           <Route path='/sign-in' render={() => (
-            <SignIn msgAlert={this.msgAlert} setUserProfile={this.setUserProfile} />
+            <div className="row">
+              <div className="col-sm-10 col-md-6 mx-auto">
+                <div className="section-title">Sign In</div>
+                <div className="box">
+                  <SignIn msgAlert={this.msgAlert} setUserProfile={this.setUserProfile} />
+                </div>
+              </div>
+            </div>
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} clearProfile={this.clearProfile} user={user} />

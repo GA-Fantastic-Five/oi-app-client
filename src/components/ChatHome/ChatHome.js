@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 import Message from '../Messages/Message'
 import RoomData from '../RoomData/RoomData'
-import RoomInfo from '../RoomInfo/RoomInfo'
+// import RoomInfo from '../RoomInfo/RoomInfo'
 
 // Import react bootstrap
 import Form from 'react-bootstrap/Form'
@@ -70,26 +70,6 @@ class ChatHome extends Component {
         }
       })
     })
-
-    // io.on('user join', data => {
-    //   this.setState(prevState => {
-    //     return {
-    //       // when a new user joins the chat, the server sends that user's data
-    //       // and we put it in the 'connectedUsers' array in our state
-    //       connectedUsers: [ ...prevState.connectedUsers, { key: uuid(), nickname: data.nickname, avatar: data.avatar } ]
-    //     }
-    //   })
-    // })
-    //
-    // io.on('user leave', data => {
-    //   this.setState(prevState => {
-    //     return {
-    //       // when a new user joins the chat, the server sends that user's data
-    //       // and we put it in the 'connectedUsers' array in our state
-    //       connectedUsers: prevState.splice(user => { return user.owner === data.owner })
-    //     }
-    //   })
-    // })
   }
 
   componentWillUnmount () {
@@ -105,6 +85,7 @@ class ChatHome extends Component {
   handleMessage = event => {
     // preventing default because it's a submit
     event.preventDefault()
+
     // create a promise chain, allowing us to use .then and .catch
     Promise.resolve()
       // .emit sends the server an event called 'message' and sends data as the next argument (second parameter)
@@ -127,13 +108,10 @@ class ChatHome extends Component {
       // created divs with classes for our chat form
       <div>
         <div className="row">
-          <RoomInfo />
-        </div>
-        <div className="row">
-          <div className="col-12 col-lg-3 col-md-4 col-sm-12">
+          <div className="col-5 col-xl-2 col-lg-3 col-md-4 col-sm-5">
             <RoomData connectedUsers={this.state.connectedUsers} />
           </div>
-          <div className="col-12 col-lg-9 col-md-8 col-sm-12">
+          <div className="col-7 col-xl-10 col-lg-9 col-md-8 col-sm-7">
             <div className="col-12 p-0 m-0">
               <ScrollToBottom className="message-container border rounded">
                 {this.state.messages ? messageJsx : <p>No messages</p>}

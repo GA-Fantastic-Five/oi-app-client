@@ -1,7 +1,52 @@
+// Setting bootstrap variables prior to importing bootstrap
+$primary: #D9304F;
+$danger: #FF1DC0;
+
+// Importing bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Style for the entire app
+body {
+  background: #fff;
+}
+
+.box {
+  @extend .border, .rounded;
+
+  background: #fff;
+  padding: 1.5rem;
+}
+
+.section-title {
+  @extend .mb-1;
+}
+
+.section-title-spacer {
+  @extend .mb-1;
+  height: 24px;
+}
 
 // Styling the nav dropdown so that it's to the left of the button instead
 // of the right which causes it to be off-screen.
 .dropdown-menu.show {
   left: -100%
+}
+
+// Changing container sizes to fit better on screens
+@media (max-width: 576px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    max-width: 90%;
+  }
 }

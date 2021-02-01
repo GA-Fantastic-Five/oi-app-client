@@ -1,22 +1,20 @@
-$primary: #D9304F;
-$secondary: #FFF600;
-$danger: #FF1DC0;
-@import '~bootstrap/scss/bootstrap';
-
 $backgroundImageUrl: 'https://media4.giphy.com/media/l41JRkXhSia9r1M9a/200w.webp?cid=ecf05e4772adda599465413c95bfb62522e8a4feaca01c4a&rid=200w.webp';
+
 body {
-  background-image: url($backgroundImageUrl);
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
+  // background-image: url($backgroundImageUrl);
+  // background-size: cover;
+  // background-position: center;
+  // height: 100vh;
 }
+
 .home {
   display: flex;
   justify-content: center;
   align-items: center;
-color: white;
-textAlign: center;
-&.primary {
-  align-items: center;
-}
+  color: white;
+  text-align: center;
+
+  &.primary {
+    align-items: center;
+  }
 }
