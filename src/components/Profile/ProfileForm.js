@@ -9,7 +9,7 @@ const ProfileForm = ({ profile, handleSubmit, handleChange }) => (
       <Form.Control className= "input"
         placeholder='Got A Name?'
         // This name should line up with the state we want to change
-        // name='nickname'
+        name='nickname'
         value={profile.nickname}
         onChange={handleChange}
       />
@@ -19,7 +19,7 @@ const ProfileForm = ({ profile, handleSubmit, handleChange }) => (
       <Form.Control
         placeholder='Enter profile avatar, a link to your image'
         // This name should line up with the state we want to change
-        // name='avatar'
+        name='avatar'
         value={profile.avatar}
         onChange={handleChange}
       />
