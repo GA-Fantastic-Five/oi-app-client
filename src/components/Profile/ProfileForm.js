@@ -23,7 +23,7 @@ const ProfileForm = ({ profile, handleSubmit, handleChange }) => (
         value={profile.avatar}
         onChange={handleChange}
       />
-      <Button variant="primary" type="submit">
+      <Button className='primary' variant="primary" type="submit">
         Create Me
       </Button>
     </Form.Group>
