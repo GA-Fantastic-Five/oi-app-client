@@ -17,10 +17,10 @@ const authenticatedOptions = userEmail => (
 
 const unauthenticatedOptions = (
   <Fragment>
-    <Nav>
-      <Nav.Link href="#sign-up">Sign Up</Nav.Link>
-      <Nav.Link href="#sign-in">Sign In</Nav.Link>
-    </Nav>
+    { /* // <Nav>
+    //   <Nav.Link href="#sign-up">Sign Up</Nav.Link>
+    //   <Nav.Link href="#sign-in">Sign In</Nav.Link>
+    // </Nav> */}
   </Fragment>
 )
 

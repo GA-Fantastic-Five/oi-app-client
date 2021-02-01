@@ -1,0 +1,87 @@
+$primary: #D9304F;
+$secondary: #54c0b2;
+$danger: #FF1DC0;
+@import '~bootstrap/scss/bootstrap';
+.container.mt-3{
+  color: $primary;
+  font-weight: 200;
+}
+div{
+
+
+// .col12.col-lg-3.col-md-4.col-sm-12 {
+//   border: 15px solid $primary;
+// }
+// .col-12.col-lg-9.col-md-8.col-sm-12{
+//   border: 10px solid $primary;
+// }
+// .chat-sidenav.border.rounded {
+//   border: 15px solid $primary;
+// }
+.chat-sidenav.border.rounded {
+  background: linear-gradient(90deg, rgba(201,165,237,1) 14%, rgba(217,233,249,1) 53%, rgba(161,232,223,1) 86%);
+
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: left;
+  color: #D9304F;
+  font-weight: 200;
+  box-sizing: content-box;
+  max-height: 100px;
+  border: 15px solid #D9304F !important;
+  border-radius: .25rem !important;
+  align-content: space-around;
+}
+.p-0 {
+        padding: 0 !important;
+}
+
+
+.m-0 {
+        margin: 0 !important;
+}
+
+.col-12 {
+        border: 15px solid $primary;
+        flex: auto;
+        /* max-width: 60%; */
+        padding-right: 50px;
+}
+.displayProfile {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border: 13px solid $primary;
+  background: linear-gradient(90deg, rgba(201,165,237,1) 14%, rgba(217,233,249,1) 53%, rgba(161,232,223,1) 86%);
+  h3 {
+    display: block;
+    padding: 30px;
+  }
+}
+.img-size {
+  max-width: 200px;
+  max-height: 200px;
+  padding: 50px;
+}
+.index {
+   background: linear-gradient(90deg, rgba(201,165,237,1) 14%, rgba(217,233,249,1) 53%, rgba(161,232,223,1) 86%);
+   border: 13px solid $primary;
+   text-align: center;
+}
+}
+
+.col-sm-10.col-md-8.mx-auto.mt-5 {
+  font-weight: 300;
+}
+.showProfile {
+  border: 12px solid $primary;
+background: linear-gradient(90deg, rgba(201,165,237,1) 14%, rgba(217,233,249,1) 53%, rgba(161,232,223,1) 86%);
+}
+.input {
+  max-width: 450px;
+}
+.btn.primary {
+  &:hover {
+        background-color: $primary;
+    }
+}
