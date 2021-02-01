@@ -40,7 +40,6 @@ class Home extends Component {
         [parent]: { ...prevState[parent], [event.target.name]: event.target.value }
       }
     })
-    console.log(event.target.getAttribute('parent'))
   }
 
   onSignIn = event => {
