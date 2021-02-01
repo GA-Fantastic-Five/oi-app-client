@@ -7,9 +7,9 @@ const ProfileForm = ({ profile, handleSubmit, handleChange }) => (
     <Form.Group>
       <Form.Label>Nickname</Form.Label>
       <Form.Control className= "input"
-        placeholder='Got A Name?'
+        placeholder="Got A Name?"
         // This name should line up with the state we want to change
-        // name='nickname'
+        // name="nickname"
         value={profile.nickname}
         onChange={handleChange}
       />
@@ -17,13 +17,13 @@ const ProfileForm = ({ profile, handleSubmit, handleChange }) => (
     <Form.Group>
       <Form.Label>Avatar</Form.Label>
       <Form.Control
-        placeholder='Enter profile avatar, a link to your image'
+        placeholder="Enter profile avatar, a link to your image"
         // This name should line up with the state we want to change
-        // name='avatar'
+        // name="avatar"
         value={profile.avatar}
         onChange={handleChange}
       />
-      <Button className='primary' variant="primary" type="submit">
+      <Button className="primary" variant="primary" type="submit">
         Create Me
       </Button>
     </Form.Group>
