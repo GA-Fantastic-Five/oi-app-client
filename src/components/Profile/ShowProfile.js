@@ -83,8 +83,8 @@ class ProfileShow extends Component {
 
     const buttonsJsx = (
       <div>
-        <Button variant="primary" onClick={this.handleDelete}>Delete Profile</Button>
-        <Button variant="primary">
+        <Button className='primary' variant="primary" onClick={this.handleDelete}>Delete Profile</Button>
+        <Button className='primary' variant="primary">
           <Link to={'/profile/edit'}>Update Profile</Link>
         </Button>
       </div>

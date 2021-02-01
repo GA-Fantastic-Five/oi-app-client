@@ -79,7 +79,7 @@ class SignIn extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Button
+            <Button className='primary'
               variant="primary"
               type="submit"
             >
