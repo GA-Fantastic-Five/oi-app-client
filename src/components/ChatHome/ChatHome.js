@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 import Message from '../Messages/Message'
 import RoomData from '../RoomData/RoomData'
-import RoomInfo from '../RoomInfo/RoomInfo'
+// import RoomInfo from '../RoomInfo/RoomInfo'
 
 // Import react bootstrap
 import Form from 'react-bootstrap/Form'
@@ -30,14 +30,26 @@ class ChatHome extends Component {
     this.state = {
       // create an empty array [empty chatroom]
       messages: [],
+      // track all the users connected to the chat
+      connectedUsers: [],
       // set our chat message input to an empty string
-      chat_message: ''
+      chat_message: '',
+      sender: '',
+      users: []
     }
   }
 
   componentDidMount () {
     // starts up socket in the client, and passes the connection to our api server
-    io = socketio(endpoint)
+    const { user } = this.props
+
+    // console.log(profile)
+    io = socketio(endpoint, {
+      query: {
+        token: user._id
+      }
+    })
+
     // .on sets up a socket event listener
     // when the server emits 'newMessage' client will handle that
     io.on('newMessage', message => {
@@ -46,10 +58,22 @@ class ChatHome extends Component {
         return {
           // returning our message array (prevState.messages), builds a new message with objects unique id(uuid)
           // and the message content
-          messages: [ ...prevState.messages, { id: uuid(), content: message } ]
+          messages: [ ...prevState.messages, { id: uuid(), content: message.message, sender: message.sender, time: message.time } ]
         }
       })
     })
+
+    io.on('user update', data => {
+      this.setState(prevState => {
+        return {
+          connectedUsers: data
+        }
+      })
+    })
+  }
+
+  componentWillUnmount () {
+    io.disconnect()
   }
 
   // Create a controlled input
@@ -61,18 +85,21 @@ class ChatHome extends Component {
   handleMessage = event => {
     // preventing default because it's a submit
     event.preventDefault()
+
     // create a promise chain, allowing us to use .then and .catch
     Promise.resolve()
       // .emit sends the server an event called 'message' and sends data as the next argument (second parameter)
       .then(io.emit('message', this.state.chat_message))
       // setting the state so that the message input is once again cleared
       .then(this.setState({ chat_message: '' }))
+      .then(this.setState({ sender: '' }))
+      .then(this.setState({ time: '' }))
       // catch an error
       .catch(console.error)
   }
 
   render () {
-    // returns our chat with the new message in it (JSX objects)
+    // returns our chat with the new message in it (JSX objects) content
     const messageJsx = this.state.messages.map(message => (
       <Message key={message.id} message={message} />
     ))
@@ -81,25 +108,23 @@ class ChatHome extends Component {
       // created divs with classes for our chat form
       <div>
         <div className="row">
-          <RoomInfo />
-        </div>
-        <div className="row">
-          <div className="col-4">
-            <RoomData />
+          <div className="col-5 col-xl-2 col-lg-3 col-md-4 col-sm-5">
+            <RoomData connectedUsers={this.state.connectedUsers} />
           </div>
-          <div className="col-8">
-            <div className="col-12">
-              <ScrollToBottom className="message-container" style={{ border: '1px solid black' }}>
+          <div className="col-7 col-xl-10 col-lg-9 col-md-8 col-sm-7">
+            <div className="col-12 p-0 m-0">
+              <ScrollToBottom className="message-container border rounded">
                 {this.state.messages ? messageJsx : <p>No messages</p>}
               </ScrollToBottom>
             </div>
-            <div className="col-12 mt-3">
+            <div className="col-12 mt-3 p-0">
               <Form onSubmit={this.handleMessage} style={{ display: 'flex' }}>
                 <div className="col-10 p-0 m-0">
                   <Form.Group controlId="formBasicPassword">
                     <Form.Control
                       type="text"
                       placeholder="Write your message"
+                      style={{ borderRadius: '.25rem 0 0 .25rem', borderRight: 'transparent' }}
                       name="chat_message"
                       value={this.state.chat_message}
                       onChange={this.handleChange}
@@ -107,7 +132,12 @@ class ChatHome extends Component {
                   </Form.Group>
                 </div>
                 <div className="col-2 p-0 m-0">
-                  <Button className="w-100" variant="primary" type="submit">
+                  <Button
+                    className="w-100"
+                    variant="primary"
+                    type="submit"
+                    style={{ borderRadius: '0 .25rem .25rem 0' }}
+                  >
                     Send
                   </Button>
                 </div>

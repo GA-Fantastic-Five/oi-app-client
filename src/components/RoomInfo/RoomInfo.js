@@ -7,9 +7,10 @@ class RoomInfo extends Component {
       placeholder: ''
     }
   }
+
   render () {
     return (
-      <div className='col-4 m-auto'>Welcome to OI chat</div>
+      <div className='col-7 col-xl-10 col-lg-9 col-md-8 col-sm-7 ml-auto'>Welcome to OI chat</div>
     )
   }
 }
