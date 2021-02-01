@@ -65,6 +65,7 @@ div{
 }
 .index {
    background: linear-gradient(90deg, rgba(201,165,237,1) 14%, rgba(217,233,249,1) 53%, rgba(161,232,223,1) 86%);
+   border: 13px solid $primary;
    text-align: center;
 }
 }
@@ -78,4 +79,9 @@ background: linear-gradient(90deg, rgba(201,165,237,1) 14%, rgba(217,233,249,1) 
 }
 .input {
   max-width: 450px;
+}
+.btn.primary {
+  &:hover {
+        background-color: $primary;
+    }
 }

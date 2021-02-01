@@ -1,7 +1,7 @@
 import React from 'react'
 import './Home.scss'
-// import { Link } from 'react-router-dom'
-// import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 const Home = () => {
   // const backgroundImageUrl = 'IMG_0874.JPG'
@@ -25,13 +25,13 @@ const Home = () => {
     // <div style={homeStyles}>
     <div className='home' style={headingStyle}>
       <h1>Come Chat With Oi App</h1>
-      {/*
-      // <Link to='/sign-up'>
-      //   <Button className='primary' variant="primary">Make An Account!</Button>
-      // </Link>
-      // <Link to='/sign-in'>
-      //   <Button className='primary' variant="primary">Sign In To Chat!</Button>
-      // </Link> */}
+
+      <Link to='/sign-up'>
+        <Button className='primary' variant="primary">Make An Account!</Button>
+      </Link>
+      <Link to='/sign-in'>
+        <Button className='primary' variant="primary">Sign In To Chat!</Button>
+      </Link>
     </div>
     // </div>
   )
