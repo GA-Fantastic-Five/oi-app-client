@@ -61,6 +61,17 @@ div{
         /* max-width: 60%; */
         padding-right: 50px;
 }
+
+}
+a {
+        color: white;
+        /* color: #D9304F; */
+        text-decoration: none;
+        // background-color: transparent;
+        &:hover {
+        color: white;
+        text-decoration: none;
+}
 }
 
 .col-sm-10.col-md-8.mx-auto.mt-5 {

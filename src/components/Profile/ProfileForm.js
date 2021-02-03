@@ -24,7 +24,7 @@ const ProfileForm = ({ profile, handleSubmit, handleChange }) => (
         onChange={handleChange}
       />
       <Button className='primary' variant="primary" type="submit">
-        Create Me
+        Submit
       </Button>
     </Form.Group>
   </Form>
