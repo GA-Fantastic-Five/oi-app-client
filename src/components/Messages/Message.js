@@ -15,8 +15,8 @@ class Message extends Component {
     const { message } = this.props
     return (
       <Toast>
-        <Toast.Header>
-          <img src="picture" className="message rounded mr-2" alt="" />
+        <Toast.Header closeButton={false}>
+          {/* <img src={message.avatar} className="message rounded mr-2" alt="" /> */}
           <strong className="mr-auto">{message.sender}</strong>
           <small>{message.time}</small>
         </Toast.Header>
