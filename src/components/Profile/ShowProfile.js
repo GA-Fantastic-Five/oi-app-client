@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react'
 // Import withRouter to have access to "history"
 import { withRouter, Redirect, Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
 
 import Spinner from 'react-bootstrap/Spinner'
 import { showProfile, deleteProfile } from '../../api/profiles'
@@ -93,11 +94,16 @@ class ProfileShow extends Component {
     return (
       <Fragment>
         <div className="displayProfile">
-          <h3>Nickname: {profile.nickname}</h3>
-          <h3> Your Avatar:
-            <img className="img-size" src={profile.avatar} />
-          </h3>
-          { user._id === profile.owner && buttonsJsx }
+          <Card style={{ width: '18rem' }}>
+            <Card.Img variant="top" className="img-size" src={profile.avatar} />
+            <Card.Body>
+              <Card.Title><h3>Nickname: {profile.nickname}</h3></Card.Title>
+              <Card.Text>
+                Your profile overview.
+              </Card.Text>
+              { user._id === profile.owner && buttonsJsx }
+            </Card.Body>
+          </Card>
         </div>
       </Fragment>
     )
