@@ -38,3 +38,6 @@ Working in a group setting and learning new concepts such as socket.io and react
 - Javascript
 
 ## WireFrames
+![Sign-in/up](./public/SignIn-UpWF.png)
+![Chat-Home](./public/ChatHomeWF.png)
+![Chat-Room](./public/ChatRoomWF.png)
