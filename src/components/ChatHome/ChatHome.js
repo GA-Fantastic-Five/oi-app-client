@@ -58,7 +58,7 @@ class ChatHome extends Component {
         return {
           // returning our message array (prevState.messages), builds a new message with objects unique id(uuid)
           // and the message content
-          messages: [ ...prevState.messages, { id: uuid(), content: message.message, sender: message.sender, time: message.time } ]
+          messages: [ ...prevState.messages, { id: uuid(), content: message.message, sender: message.sender, time: message.time, avatar: message.avatar } ]
         }
       })
     })
