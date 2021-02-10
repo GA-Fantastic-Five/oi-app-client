@@ -1,9 +1,9 @@
 Oi App - A Chat Application
 
 ## Links
-![Deployed Client] (https://ga-fantastic-five.github.io/oi-app-client/#/)
-![API Repo] (https://github.com/GA-Fantastic-Five/oi-app-api)
-![Deployed API] (https://oi-chat-api.herokuapp.com/)
+- [Deployed Client] (https://ga-fantastic-five.github.io/oi-app-client/#/)
+- [API Repo] (https://github.com/GA-Fantastic-Five/oi-app-api)
+- [Deployed API] (https://oi-chat-api.herokuapp.com/)
 
 ## Description:
 The Oi Chat Application is a web application that allows user to chat with one another in real time. Users are able to create accounts and sign in and customize their own profiles (nickname, avatar). Users will be able to see other messages from other users inside the chatroom. Our application was created using react and socket.io technologies. This group project was made possible by implementing agile and scrum methods to create a cohesive workflow between developers. This client contains our first version (MVP) of our application.
