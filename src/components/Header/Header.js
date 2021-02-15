@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import Logo from './logosm.jpg'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 
+// Authenticated
 const authenticatedOptions = userEmail => (
   <Fragment>
     <Nav.Link href="#chat">Chat</Nav.Link>
@@ -15,6 +16,7 @@ const authenticatedOptions = userEmail => (
   </Fragment>
 )
 
+// Unauthenticated
 const unauthenticatedOptions = (
   <Fragment>
     <Nav>

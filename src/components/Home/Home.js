@@ -13,6 +13,7 @@ import messages from '../AutoDismissAlert/messages'
 // Home SCSS
 import './Home.scss'
 
+// Home class constructor
 class Home extends Component {
   constructor (props) {
     super(props)
@@ -29,7 +30,7 @@ class Home extends Component {
       }
     }
   }
-
+  // Handle change function
   handleChange = event => {
     event.persist()
 
@@ -41,7 +42,7 @@ class Home extends Component {
       }
     })
   }
-
+  // On sign in function
   onSignIn = event => {
     event.preventDefault()
 
@@ -68,7 +69,7 @@ class Home extends Component {
         })
       })
   }
-
+  // On sign up function
   onSignUp = event => {
     event.preventDefault()
 
@@ -121,12 +122,12 @@ class Home extends Component {
       backgroundPosition: 'center',
       height: '450px'
     }
-
+    // Authorized
     const authorizedJsx = (
       <Fragment>
         <div className="col-12 col-lg-4 col-md-4 col-sm-12">
           <div className="box">
-            <p className="text-center">Placeholder</p>
+            <p className="text-center">To start chatting, select Chat above!</p>
           </div>
         </div>
         <div className="col-12 col-lg-8 col-md-8 col-sm-12">
@@ -136,9 +137,10 @@ class Home extends Component {
         </div>
       </Fragment>
     )
-
+    //  Unauthorized
     const unauthorizedJsx = (
       <Fragment>
+        {/* Sign in Form JSX */}
         <div className="col-12 col-lg-4 col-md-4 col-sm-5">
           <div className="section-title">Sign In</div>
           <div className="box">
@@ -150,7 +152,7 @@ class Home extends Component {
               parent="signIn"
             />
           </div>
-
+          {/* Sign Up Form JSX */}
           <div className="section-title mt-3">Sign Up</div>
           <div className="box">
             <SignUpForm
